@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whoxy | Desenvolvedor & Criador de Soluções</title>
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --card-bg: #0f172a;
+            --card-border: #1e293b;
+            --accent-blue: #0284c7;
+            --accent-bright: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-bright);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-bright);
+        }
+
+        /* Menu Hamburger para Mobile */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            background: none;
+            border: none;
+        }
+
+        /* Seção Principal (Hero) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #0f172a 0%, var(--bg-color) 70%);
+            margin-top: 80px;
+        }
+
+        .hero-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-bright);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-bright), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-bright);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-bright);
+            color: var(--accent-bright);
+        }
+
+        /* Estilos Globais de Seção */
+        section {
+            padding: 100px 10% 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Seção Sobre Mim */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            font-size: 2rem;
+            color: var(--accent-bright);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Seção de Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .skill-category h3 {
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-main);
+        }
+
+        .skill-category h3 i {
+            color: var(--accent-bright);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-badge {
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--accent-bright);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        /* Seção de Projetos Ampliada */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, #0284c7, #1e293b);
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .project-header i {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .project-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-body h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .project-body p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tech-tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-bright);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .project-links {
+            margin-top: auto;
+        }
+
+        .project-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-bright);
+        }
+
+        /* Seção de Contato */
+        .contact {
+            text-align: center;
+            background: linear-gradient(to top, #06090f, var(--bg-color));
+            border-top: 1px solid var(--card-border);
+        }
+
+        .contact-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-box h3 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Rodapé Completo */
+        footer {
+            background: #06090f;
+            padding: 60px 10% 40px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .footer-logo span {
+            color: var(--accent-bright);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 50%;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-blue);
+            color: #ffffff;
+            border-color: var(--accent-bright);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(30, 41, 59, 0.5);
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--card-border);
+                z-index: 1000;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav a {
+                margin: 20px 0;
+                font-size: 1.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-box {
+                padding: 40px 20px;
+            }
+
+            section {
+                padding: 80px 5% 60px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">DEV<span>.WHOXY</span></div>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav id="navMenu">
+            <a href="#sobre">Sobre</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Seção Hero -->
+    <section class="hero">
+        <div class="hero-badge">Disponível para Projetos & Freelas</div>
+        <h1>Transformando ideias em <span>código e automação</span></h1>
+        <p>Desenvolvedor focado em criar bots inteligentes, sistemas web de alta performance e soluções personalizadas sob medida.</p>
+        <div class="btn-group">
+            <a href="#projetos" class="btn btn-primary">Ver Meus Projetos</a>
+            <a href="#contato" class="btn btn-outline">Entrar em Contato</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Mim -->
+    <section id="sobre">
+        <div class="section-title">
+            <h2>Sobre Mim</h2>
+            <p>Conheça um pouco mais sobre minha trajetória e paixão por tecnologia</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Desenvolvendo soluções eficientes e focadas em resultados</h3>
+                <p>Sou um desenvolvedor apaixonado por criar automações, bots complexos e sistemas web dinâmicos. Meu foco principal é transformar problemas complexos em ferramentas simples, eficientes e intuitivas para os usuários.</p>
+                <p>Sempre busco me manter atualizado com as melhores práticas de desenvolvimento, garantindo código limpo, escalável e de alta performance.</p>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <h4>+3</h4>
+                        <p>Anos de Experiência</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>+20</h4>
+                        <p>Projetos Entregues</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual" style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 40px; border-radius: 24px; text-align: center;">
+                <i class="fa-solid fa-terminal" style="font-size: 5rem; color: var(--accent-bright); margin-bottom: 20px;"></i>
+                <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Foco em Inovação</h4>
+                <p style="color: var(--text-muted); line-height: 1.6;">Dedicação constante para entregar soluções modernas que superam expectativas e otimizam processos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Habilidades -->
+    <section id="habilidades" style="background: rgba(15, 23, 42, 0.4);">
+        <div class="section-title">
+            <h2>Habilidades & Tecnologias</h2>
+            <p>Ferramentas e linguagens que utilizo no dia a dia para desenvolver</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3><i class="fa-solid fa-code"></i> Linguagens</h3>
+                <div class="skill-list">
+                    <span class="skill-badge">Python</span>
+                    <span class="skill-badge">JavaScript (ES6+)</span>
+                    <span class="skill-badge">HTML5</span>
+                    <span class="skill-badge">CSS3</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa-solid fa-server"></i> Backend & APIs</h3>
+                <div class="skill-list">
+                    <span class="skill-badge">Node.js</span>
+                    <span class="skill-badge">Express.js</span>
+                    <span class="skill-badge">Discord.py</span>
+                    <span class="skill-badge">REST APIs</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa-solid fa-database"></i> Banco de Dados</h3>
+                <div class="skill-list">
+                    <span class="skill-badge">SQLite</span>
+                    <span class="skill-badge">MySQL</span>
+                    <span class="skill-badge">MongoDB</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3><i class="fa-solid fa-toolbox"></i> Ferramentas</h3>
+                <div class="skill-list">
+                    <span class="skill-badge">Git & GitHub</span>
+                    <span class="skill-badge">VS Code</span>
+                    <span class="skill-badge">Linux</span>
+                    <span class="skill-badge">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Projetos Ampliada -->
+    <section id="projetos">
+        <div class="section-title">
+            <h2>Projetos em Destaque</h2>
+            <p>Alguns dos principais sistemas, bots e automações desenvolvidos</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fa-brands fa-discord"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Bot de Discord para Gestão</h3>
+                    <p>Bot completo desenvolvido em Python para gerenciar comunidades de grande porte. Inclui moderação automática, logs de auditoria, sistema de tickets e banco de dados integrado.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Discord.py</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Wh0xy" target="_blank">Ver Código no GitHub <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #0369a1, #0f172a);">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Sistemas Web & Automações</h3>
+                    <p>Desenvolvimento de painéis administrativos eficientes e automações de fluxos de dados, integrando APIs externas e garantindo alta performance operacional.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Express</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Wh0xy" target="_blank">Ver Demo / GitHub <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="project-body">
+                    <h3>Automação de Tarefas & Scripts</h3>
+                    <p>Criação de scripts customizados em Python e Node.js para raspagem de dados (Web Scraping), processamento de planilhas e integração automatizada de serviços.</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">APIs</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Wh0xy" target="_blank">Ver Repositório <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="contact">
+        <div class="contact-box">
+            <h3>Vamos tirar sua ideia do papel?</h3>
+            <p>Precisa de um bot customizado para o seu servidor, de um sistema web ou de automações? Entre em contato por um dos canais abaixo.</p>
+            <a href="mailto:gustavope25@hotmail.com" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> Enviar E-mail Direto</a>
+        </div>
+    </section>
+
+    <!-- Rodapé Completo -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">DEV<span>.WHOXY</span></div>
+            <div class="social-icons">
+                <!-- GitHub -->
+                <a href="https://github.com/Wh0xy" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/whxstoreoficial/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <!-- X (Twitter) -->
+                <a href="https://x.com/Whoxy3" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/whoxy" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <!-- Discord -->
+                <a href="https://discord.gg/8mXSbhK7hR" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Desenvolvido por Whoxy. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Script para controle do menu mobile -->
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('nav a');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = menuToggle.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+    </script>
+</body>
+</html>
